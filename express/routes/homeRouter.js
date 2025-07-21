@@ -32,10 +32,10 @@ router.get('/', (req, res) => {
     res.status(200).set({ 'Content-Type': 'text/html;charset=utf-8' }).send('默认首页')
 })
 
-router.get('/:id.html', (req, res) => {
-    res.setHeader('Content-Type', 'text/html;charset=utf-8')
-    res.end(`<h1>id: ${req.params.id}</h1>`)
-})
+// router.get('/:id.html', (req, res) => {
+//     res.setHeader('Content-Type', 'text/html;charset=utf-8')
+//     res.end(`<h1>id: ${req.params.id}</h1>`)
+// })
 
 // router.get('/other', (req, res) => {
 //     res.redirect('/home')

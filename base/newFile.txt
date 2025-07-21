@@ -1,0 +1,3 @@
+测试创建一个txt并写入
+writeFile追加写入
+appendFile追加写入

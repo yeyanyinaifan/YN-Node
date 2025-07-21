@@ -1,0 +1,2 @@
+同步写入
+appendFileSync同步追加写入
