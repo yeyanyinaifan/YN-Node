@@ -10,7 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^2.2.0",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "json-server": "^1.0.0-beta.3",
     "mongoose": "^8.16.4"
   }
