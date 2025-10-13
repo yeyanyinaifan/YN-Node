@@ -3,6 +3,8 @@ const bodyParser = require('body-parser') // 引入body-parser模块
 const UserModel = require('../models/UserModel')
 const router = express.Router();
 const checkLoginMiddleware = require('../middlewares/checkLoginMiddleware')
+const jwt = require('jsonwebtoken') // 引入jsonwebtoken模块
+const checkTokenMiddleware = require('../middlewares/checkTokenMiddleware')
 
 router.get('/home', checkLoginMiddleware, (req, res) => {
     res.send(`<h1>欢迎你，${req.session.username}，id为${req.session._id}</h1>`)
@@ -51,6 +53,14 @@ router.all('/test', checkLoginMiddleware, (req, res) => {
     res.end('test')
 })
 
+router.all('/testToken', checkTokenMiddleware, (req, res) => {
+    res.json({
+        code: 200,
+        msg: 'testToken',
+        data: req.decoded
+    })
+})
+
 // router.all('/*', (req, res) => {
 //     res.end('404')
 // })
@@ -90,7 +100,15 @@ router.post('/login', urlencodedParser, async (req, res) => {
         if (data) {
             req.session.username = data.username
             req.session._id = data._id
-            res.redirect('/home')
+            jwt.sign({
+                username: data.username,
+                _id: data._id
+            }, 'secret', {
+                expiresIn: '1m'
+            }, (err, token) => {
+                res.send(token)
+            })
+            // res.redirect('/home')
         } else {
             res.send('登录失败')
         }
